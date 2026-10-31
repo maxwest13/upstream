@@ -1,0 +1,19 @@
+services:
+  db:
+    cpus: "1.0"
+    mem_limit: 2g
+    environment:
+      TS_TUNE_MEMORY: 2GB
+      TS_TUNE_NUM_CPUS: "1"
+  collector-bluesky:
+    cpus: "0.5"
+    mem_limit: 256m
+  worker:
+    cpus: "1.0"
+    mem_limit: 1g
+  api:
+    cpus: "0.5"
+    mem_limit: 512m
+  collectors:
+    cpus: "0.5"
+    mem_limit: 512m

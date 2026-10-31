@@ -1,0 +1,61 @@
+services:
+  db:
+    image: timescale/timescaledb:latest-pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: upstream
+      POSTGRES_DB: upstream
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/001_schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
+      - ./db/002_timescale.sql:/docker-entrypoint-initdb.d/002_timescale.sql:ro
+      - ./db/003_sources.sql:/docker-entrypoint-initdb.d/003_sources.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U upstream -d upstream"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    # Not exposed publicly. Use an SSH tunnel to connect from your laptop.
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  collector-bluesky:
+    build: ./collector-bluesky
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  collectors:
+    build: ./signals
+    command: python -m upstream.collectors
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  worker:
+    build: ./signals
+    command: python -m upstream.worker
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    build: ./signals
+    command: uvicorn upstream.api:app --host 0.0.0.0 --port 8080
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"   # put Caddy or nginx with HTTPS in front
+
+volumes:
+  pgdata:

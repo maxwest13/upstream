@@ -1,0 +1,41 @@
+# Culture-press RSS feeds: the outer tier (when a trend reaches the mainstream).
+# One URL per line. Lines starting with # are ignored. Dead feeds are logged
+# and skipped, so it's safe to add and remove freely.
+
+# General culture & style
+https://www.theguardian.com/culture/rss
+https://www.theguardian.com/lifeandstyle/rss
+https://www.theguardian.com/fashion/rss
+https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml
+https://rss.nytimes.com/services/xml/rss/nyt/Arts.xml
+https://rss.nytimes.com/services/xml/rss/nyt/FashionandStyle.xml
+https://feeds.npr.org/1008/rss.xml
+https://www.vulture.com/rss/index.xml
+https://www.thecut.com/rss/index.xml
+
+# Music
+https://pitchfork.com/feed/feed-news/rss
+https://www.billboard.com/feed/
+https://www.rollingstone.com/feed/
+
+# Film & TV
+https://variety.com/feed/
+https://www.hollywoodreporter.com/feed/
+
+# Fashion, streetwear, design
+https://www.vogue.com/feed/rss
+https://hypebeast.com/feed
+https://www.dazeddigital.com/rss
+https://www.dezeen.com/feed/
+
+# Tech & internet culture
+https://www.theverge.com/rss/index.xml
+https://www.wired.com/feed/rss
+https://mashable.com/feeds/rss/all
+
+# Food
+https://www.eater.com/rss/index.xml
+
+# Marketing & advertising
+https://www.adweek.com/feed/
+https://www.fastcompany.com/latest/rss

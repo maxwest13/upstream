@@ -1,0 +1,22 @@
+.env
+target/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# --- hardening (appended) ---
+.env
+*.env
+!*.env.example
+*secret*
+*.pem
+*.key
+credentials*
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+target/
+.DS_Store
